@@ -42,3 +42,7 @@ CREATE TABLE employee (
   -- set id as the primary key
   PRIMARY KEY (id)
 );
+
+SELECT * FROM department;
+SELECT * FROM role;
+SELECT * FROM employee;

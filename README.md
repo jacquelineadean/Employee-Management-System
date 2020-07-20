@@ -39,10 +39,13 @@ Build a command-line application that at a minimum allows the user to:
 Bonus points if you're able to:
 
   * Update employee managers
+  "Update Employee Manager"
 
   * View employees by manager
+  "View All Employees By Manager",
 
   * Delete departments, roles, and employees
+  "Remove Role", "Remove Department", "Remove Employee"
 
   * View the total utilized budget of a department -- ie the combined salaries of all employees in that department
 
