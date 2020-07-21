@@ -1,20 +1,21 @@
 // Dependencies
 // ===============================================================================
-const mysql = require("mysql");
-const inquirer = require("inquirer");
-const cTable = require('console.table');
+var mysql = require("mysql");
+var inquirer = require("inquirer");
+var cTable = require("console.table");
 
 // Connection details to employeeTracker_DB in MySQL database 
-const connection = mysql.createConnection({
+var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "",
-    database: "employeeTracker_DB"
+    password: "dbpassword",
+    database: "employeeTracker_DB",
+    insecureAuth : true
 });
 
 // Run connection
-connection.connect((err) => {
+connection.connect(function(err) {
     if (err) throw err;
 });
 
@@ -35,9 +36,9 @@ function runEmployeeTracker() {
             "Update Employee Role"
         ]
     })
-    .then(({ action }) => {
+    .then(function(answer) {
         // Different paths contigent on action selected
-        switch (action) {
+        switch (answer.action) {
         case "View All Employees":
             viewEmployees();
             break;
@@ -50,7 +51,7 @@ function runEmployeeTracker() {
 
 // Function to view employees
 function viewEmployees() {
-    var query = "SELECT id, first_name, last_name, role_id, manager_id FROM employee";
+    var query = "SELECT * id, first_name, last_name, role_id, manager_id FROM employee";
     connection.query(query, (err, res) => {
         if (err) throw err;
         console.table(res);
@@ -58,9 +59,29 @@ function viewEmployees() {
 };
 
 // Function to add employee
-function addEmployee() {
+// function addEmployee() {
+//     inquirer
+//     .prompt({
+//         name: "first_name",
+//         type: "input",
+//         message: "What is the employee's first name?"
+//     })
+//     .then(function(answer){
+//         var query = "INSERT INTO employee SET ?",
+//         connection.query(query,
+//             {
+//                 first_name: response.first_name,
+//                 last_name: response.last_name,
+//                 role_id: response.role.id,
+//                 manager_id: response.manager_id
+//             },
+//             function (err, res) {
 
-};
+//             })
+//     })
+// };
 
 // Call function to begin prompts
 runEmployeeTracker();
+
+connection.end();
