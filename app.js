@@ -69,12 +69,7 @@ function runEmployeeTracker() {
 
 // Function to view employees
 function viewEmployees() {
-    var query = 
-    `SELECT id, first_name, last_name, role_id, manager_id
-    FROM employee
-    INNER JOIN role
-    ON table1.column_name = table2.column_name;`
-    `SELECT id, first_name, last_name, role_id, manager_id FROM employee`
+    var query = `SELECT * FROM employee;`
 
     connection.query(query, function (err, res) {
         if (err) throw err;
@@ -119,22 +114,23 @@ function addEmployee() {
                 function (err, res) {
                     if (err) throw err;
                     runEmployeeTracker();
-                })
-               
+                }
+            )
+
         })
 };
 
 // Function to view departments
-function viewDepartments() {}
+function viewDepartments() { }
 
 // Function to add department
-function addDepartment() {}
+function addDepartment() { }
 
 // Function to view roles
-function viewRoles() {}
+function viewRoles() { }
 
 // Function to add role
-function addRole() {}
+function addRole() { }
 
 // Function to update employee role
-function updateEmployeeRole() {}
+function updateEmployeeRole() { }
