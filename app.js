@@ -69,7 +69,12 @@ function runEmployeeTracker() {
 
 // Function to view employees
 function viewEmployees() {
-    var query = `SELECT * FROM employee;`
+   
+    var query = 
+    `SELECT department.name, role.title, role.salary, employee.first_name, employee.last_name, employee.manager_id
+    FROM department 
+    RIGHT JOIN role ON department.id = role.department_id
+    RIGHT JOIN employee ON role.id = employee.role_id;`
 
     connection.query(query, function (err, res) {
         if (err) throw err;
@@ -93,14 +98,16 @@ function addEmployee() {
                 message: "What is the employee's last name?"
             },
             {
-                name: "role_id",
-                type: "input",
-                message: "What is the employee's role?"
+                name: "role",
+                type: "list",
+                message: "What is the employee's role?",
+                choices: []
             },
             {
-                name: "manager_id",
+                name: "manager",
                 type: "input",
-                message: "Who is the employee's manager?"
+                message: "Who is the employee's manager?",
+                choices: []
             }
         ]).then(function (response) {
             var query = "INSERT INTO employee SET ?"
