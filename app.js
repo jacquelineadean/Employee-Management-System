@@ -1,19 +1,8 @@
 // Dependencies
 // ===============================================================================
-const mysql = require("mysql");
-const inquirer = require("inquirer");
+const { prompt } = require("inquirer");
+const db = require("./db");
 require("console.table");
-
-
-// Connection details to employeeTracker_DB in MySQL database 
-const connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "dbpassword",
-    database: "employeeTracker_DB",
-    insecureAuth: true
-});
 
 // Run connection
 connection.connect((err) => {
